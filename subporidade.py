@@ -45,7 +45,7 @@ def Disp_max(eta, beta, Dp, Df):
     return resultado.x, -resultado.fun
 
 # Interface do Streamlit
-st.title("Otimização de Política de Substituição")
+st.title("Política de Substituição por Idade")
 
 # Entrada de parâmetros
 eta = st.number_input("Parâmetro de Escala (η):")
