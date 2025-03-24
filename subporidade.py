@@ -48,32 +48,32 @@ def Disp_max(eta, beta, Dp, Df):
 st.title("Otimização de Política de Substituição")
 
 # Entrada de parâmetros
-eta = st.number_input("Parâmetro de Escala (η):", min_value=0.1, value=100.0, step=1.0)
-beta = st.number_input("Parâmetro de Forma (β):", min_value=0.1, value=1.5, step=0.1)
-Cp = st.number_input("Custo Preventivo (Cp):", min_value=0.1, value=300.0, step=10.0)
-Cf = st.number_input("Custo Corretivo (Cf):", min_value=0.1, value=500.0, step=10.0)
-Dp = st.number_input("Tempo de Parada Preventiva (Dp):", min_value=0.1, value=5.0, step=0.1)
-Df = st.number_input("Tempo de Parada Corretiva (Df):", min_value=0.1, value=10.0, step=0.1)
+eta = st.number_input("Parâmetro de Escala (η):")
+beta = st.number_input("Parâmetro de Forma (β):")
+Cp = st.number_input("Custo de Substituição Preventiva (Cp):")
+Cf = st.number_input("Custo de Substituição Corretiva (Cf):")
+Dp = st.number_input("Tempo de Parada para Substituição Preventiva (Dp):")
+Df = st.number_input("Tempo de Parada para Substituição Corretiva (Df):")
 
 # Botão para otimizar TC
-if st.button("Otimizar TC"):
+if st.button("Minimizar Custo"):
     T_otm, TC_otm = TC_min(eta, beta, Cp, Cf, Dp, Df)
     st.subheader("Resultado da Otimização da Taxa de Custo")
     st.write(f"Tempo ótimo de substituição: {T_otm:.2f}")
     st.write(f"Taxa de custo mínima: {TC_otm:.4f}")
 
 # Botão para otimizar disponibilidade
-if st.button("Otimizar Disponibilidade"):
+if st.button("Maximizar Disponibilidade"):
     T_otm, Disp_otm = Disp_max(eta, beta, Dp, Df)
     st.subheader("Resultado da Otimização da Disponibilidade")
     st.write(f"Tempo ótimo de substituição: {T_otm:.2f}")
     st.write(f"Disponibilidade máxima: {Disp_otm:.4f}")
 
 # Entrada para testar uma política específica
-T_teste = st.number_input("Informe um valor de T para testar a política:", min_value=0.1, value=50.0, step=1.0)
+T_teste = st.number_input("Informe um valor de T para testar a política:")
 if st.button("Testar Política"):
     TC_teste = TC(T_teste, eta, beta, Cp, Cf, Dp, Df)
     Disp_teste = Disp(T_teste, eta, beta, Dp, Df)
     st.subheader("Resultados da Política Testada")
-    st.write(f"Taxa de Custo para T={T_teste:.2f}: {TC_teste:.4f}")
-    st.write(f"Disponibilidade para T={T_teste:.2f}: {Disp_teste:.4f}")
+    st.write(f"Taxa de Custo: {TC_teste:.4f}")
+    st.write(f"Disponibilidade: {Disp_teste:.4f}")
